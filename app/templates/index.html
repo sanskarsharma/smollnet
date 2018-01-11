@@ -1,11 +1,9 @@
-<html>
-    <head>
-        <title>{{ title }} - Microblog</title>
-    </head>
-    <body>
+{% extends "base.html" %}
+{% block content%}
+
         <h1>Hello, {{ user.username }}!</h1>
         {% for post in postslist %}
         <div><p>{{post.author.username}} says : {{post.body}}</p></div>
         {%endfor%}
-    </body>
-</html>
+        
+{% endblock %}
