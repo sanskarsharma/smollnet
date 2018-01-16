@@ -1,5 +1,0 @@
-chapter 4 - Databases in flask
-flask extensions for databases
-ORM
-SQLAlchemy
-Database migrations - flask migrate : flask extension created by miqgel grinberg
