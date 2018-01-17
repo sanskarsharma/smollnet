@@ -1,4 +1,4 @@
-from app import db_instance
+from app import db_instance, login_manager_instance
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -30,6 +30,6 @@ class Post(db_instance.Model):
     def __repr__(self):
         return "<Post {}".format(self.body)
 
-@login.user_loader
-    def load_user(id):
-        return User.query.get(int (id))
+@login_manager_instance.user_loader
+def load_user(id):
+    return User.query.get(int (id))

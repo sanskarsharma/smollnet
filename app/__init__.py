@@ -12,5 +12,6 @@ app_instance.config.from_object(Config)			# setting the Config class from config
 db_instance = SQLAlchemy(app_instance)
 migrate = Migrate(app_instance, db_instance)
 login_manager_instance = LoginManager(app_instance)
-
+login_manager_instance.login_view = "login"		# this "login" is the name of our view function(in routes) which handles login of user
+												# we are setting this to use the "require login for certain pages" functionality given by flask_login extention
 from app import routes, models				 	# this "app" means app naam ka package i.e our directory which is named app
