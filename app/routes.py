@@ -52,9 +52,9 @@ def register_user():
     if current_user.is_authenticated:
         return redirect(url_for("index"))
     registrattion_form_obj = RegistrationForm()
-    if registrattion_form_obj.validate_on_submit:
+    if registrattion_form_obj.validate_on_submit():     # yha pe () ni lgaya tha tune or bht irrelevent error mila tha. python also fails silently at times
         user_obj = User(username = registrattion_form_obj.username.data, email = registrattion_form_obj.email_addr.data)
-        user_obj.set_password(registrattion_form_obj.password_fi.data)
+        user_obj.set_password(registrattion_form_obj.password.data)
         db_instance.session.add(user_obj)
         db_instance.session.commit()
         flash("Congratulations, you have been registered")
