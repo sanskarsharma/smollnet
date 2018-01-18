@@ -12,6 +12,9 @@ class User(UserMixin, db_instance.Model):
     password_hash = db_instance.Column(db_instance.String(128))
     posts = db_instance.relationship("Post", backref="author", lazy="dynamic")
 
+    about_me = db_instance.Column(db_instance.String(180))
+    last_seen = db_instance.Column(db_instance.DateTime, default= datetime.utcnow)
+
     def __repr__(self):                             # this method tells Python how to print objects of this class, which is going to be useful for debugging. 
         return "<User {}>".format(self.username)
 
