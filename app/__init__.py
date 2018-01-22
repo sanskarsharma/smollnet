@@ -3,6 +3,7 @@ from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate 
 from flask_login import LoginManager
+
 import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 import os
@@ -40,7 +41,7 @@ if not app_instance.debug:
 		if not os.path.exists('logs'):
 			os.mkdir('logs')
 		file_handler = RotatingFileHandler('logs/microblog.log', maxBytes=10240, backupCount=10)
-		file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
+		file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s \n \t\t [in %(pathname)s:%(lineno)d]'))
 		file_handler.setLevel(logging.INFO)
 		app_instance.logger.addHandler(file_handler)
 

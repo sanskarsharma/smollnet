@@ -1,8 +1,5 @@
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
-from app import app_instance
-import logging
-from logging.handlers import SMTPHandler
 
 class Config(object):
 	SECRET_KEY = os.environ.get("SECRET_KEY") or "fallback-secret-key-which-you-cannot-guess"

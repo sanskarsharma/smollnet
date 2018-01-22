@@ -85,7 +85,7 @@ def before_request():
 @app_instance.route("/edit_profile", methods=["GET", "POST"] )
 @login_required
 def edit_profile():
-    edit_profile_form = EditProfileForm()
+    edit_profile_form = EditProfileForm(orig_username= current_user.username)
     if edit_profile_form.validate_on_submit():
         current_user.username = edit_profile_form.username.data
         current_user.about_me = edit_profile_form.about_me.data
