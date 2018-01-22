@@ -33,4 +33,14 @@ class EditProfileForm(FlaskForm):
 	username = StringField("Change username : ", validators=[DataRequired()])
 	about_me = TextAreaField("Write something about yourself : ", validators=[Length(min=0,max=140)] )
 	submit_btn = SubmitField("Save Changes")
+
+	def __init__(self, orig_username, *args, **kwargs):
+		super(EditProfileForm, self).__init__(*args, **kwargs)
+		self.orig_username = orig_username
+	
+	def validate_username(self, username):
+		if username.data != self.orig_username:
+			user_obj = User.query.filter_by(username = username.data).first()
+
+
 	
