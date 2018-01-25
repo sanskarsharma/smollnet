@@ -6,6 +6,8 @@ from app.models import User
 from werkzeug.urls import url_parse
 from datetime import datetime
 
+from pyfcm import FCMNotification
+
 @app_instance.route('/')
 @app_instance.route('/index')       		# these are called decorators
 @login_required
@@ -97,3 +99,31 @@ def edit_profile():
         if current_user.about_me:
             edit_profile_form.about_me.data = current_user.about_me
     return render_template("edit_profile.html", title = "Edit Profile", form = edit_profile_form)
+
+@app_instance.route("/fcm", methods=["GET"])
+@login_required
+def send_fcm():
+    push_service = FCMNotification(api_key="AAAAbEgDzzU:APA91bEkITOc5PMGLwAwyoUtMFF7vCcNBikr30eUW6HglasaSBdqtQEzb9NtKR_fZrVY-yw0ZicDdeSi7ptWKpB_tcxVTX_a55EFgXg-_MgoqQn8uGcrad4jHr_eNvKzgBkFB6cPp45A")
+    # OR initialize with proxies
+
+    proxy_dict = {
+            
+            }
+    push_service = FCMNotification(api_key="AAAAbEgDzzU:APA91bEkITOc5PMGLwAwyoUtMFF7vCcNBikr30eUW6HglasaSBdqtQEzb9NtKR_fZrVY-yw0ZicDdeSi7ptWKpB_tcxVTX_a55EFgXg-_MgoqQn8uGcrad4jHr_eNvKzgBkFB6cPp45A", proxy_dict=proxy_dict)
+
+    # Your api-key can be gotten from:  https://console.firebase.google.com/project/<project-name>/settings/cloudmessaging
+
+    registration_id = "eqDG_kVPQP8:APA91bGrut7AVF4e63qUIr5YfJSrSoRBBh3KOqAziBGZg4ro7E0392lYHCooRaM9AQ5-LGHNzHJ6uzk7SwBJyOrmjGjHxRWhZosm3iN5nT5imfZ578Q7vo-mptZAyd9Y2L6JeA4iPbbH"
+    message_title = "Uber update"
+    message_body = "hula hula re hula hula hulla"
+
+    data_message = {"title" : "Collmmorow","description" : "efwefkwefiuwegbiwebgwegiwegwegweiguwefbiwebgiweuibgwefgwiebugiubwegwergwreguibwrgiuwrguibwrguibweruigbwubigwugbweuigbwregwgwefuiwegfuiwegwigbiwgbiwgwigubwigiwugwiugwuig","timestamp" : "1516879220","author": "issuedbySanskar"} 
+
+
+    #result = push_service.notify_single_device(registration_id=registration_id, message_title=message_title, message_body=message_body)
+    result = push_service.notify_single_device(registration_id=registration_id, message_body=message_body, data_message=data_message)
+    print(result)
+    print("\n\n")
+
+    return render_template("index.html")
+
