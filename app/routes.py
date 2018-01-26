@@ -5,6 +5,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User
 from werkzeug.urls import url_parse
 from datetime import datetime
+import time
 
 from pyfcm import FCMNotification
 
@@ -113,12 +114,15 @@ def send_fcm():
 
     # Your api-key can be gotten from:  https://console.firebase.google.com/project/<project-name>/settings/cloudmessaging
 
-    registration_id = "eqDG_kVPQP8:APA91bGrut7AVF4e63qUIr5YfJSrSoRBBh3KOqAziBGZg4ro7E0392lYHCooRaM9AQ5-LGHNzHJ6uzk7SwBJyOrmjGjHxRWhZosm3iN5nT5imfZ578Q7vo-mptZAyd9Y2L6JeA4iPbbH"
-    message_title = "Uber update"
-    message_body = "hula hula re hula hula hulla"
+    registration_id = "fB5hluUNGlg:APA91bFJz5kkoTLpZF6giEW3hnpU_Q4MMqkQwVrUI7SB8BOyfT0k_v2CimFEuoZXm9AHsg8y5KF-O2dEfOBuqt6Rqb6OFR7sN-eV6moy0FOcOwpJf9Kv2DynI1da77E3hXtiDNJpv43N"
+    message_title = "Update in Schedule"
+    message_body = "Schedule updated for FINALE"
 
-    data_message = {"title" : "Collmmorow","description" : "efwefkwefiuwegbiwebgwegiwegwegweiguwefbiwebgiweuibgwefgwiebugiubwegwergwreguibwrgiuwrguibwrguibweruigbwubigwugbweuigbwregwgwefuiwegfuiwegwigbiwgbiwgwigubwigiwugwiugwuig","timestamp" : "1516879220","author": "issuedbySanskar"} 
 
+    data_message ={"title" : "The da vinci code",
+    "description" : "wfwgf wfwefwgbiwgwigubwigi wugwiugwuig",
+    "timestamp" : str(int(time.time())),
+    "author": "issued by Sanskar"}
 
     #result = push_service.notify_single_device(registration_id=registration_id, message_title=message_title, message_body=message_body)
     result = push_service.notify_single_device(registration_id=registration_id, message_body=message_body, data_message=data_message)
