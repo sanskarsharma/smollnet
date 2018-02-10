@@ -101,33 +101,35 @@ def edit_profile():
             edit_profile_form.about_me.data = current_user.about_me
     return render_template("edit_profile.html", title = "Edit Profile", form = edit_profile_form)
 
-@app_instance.route("/fcm", methods=["GET"])
-@login_required
-def send_fcm():
-    push_service = FCMNotification(api_key="AAAAbEgDzzU:APA91bEkITOc5PMGLwAwyoUtMFF7vCcNBikr30eUW6HglasaSBdqtQEzb9NtKR_fZrVY-yw0ZicDdeSi7ptWKpB_tcxVTX_a55EFgXg-_MgoqQn8uGcrad4jHr_eNvKzgBkFB6cPp45A")
-    # OR initialize with proxies
+# @app_instance.route("/fcm", methods=["GET"])
+# @login_required
+# def send_fcm():
+#     push_service = FCMNotification(api_key="AAAAbEgDzzU:APA91bEkITOc5PMGLwAwyoUtMFF7vCcNBikr30eUW6HglasaSBdqtQEzb9NtKR_fZrVY-yw0ZicDdeSi7ptWKpB_tcxVTX_a55EFgXg-_MgoqQn8uGcrad4jHr_eNvKzgBkFB6cPp45A")
+#     # OR initialize with proxies
 
-    proxy_dict = {
+#     proxy_dict = {
             
-            }
-    push_service = FCMNotification(api_key="AAAAbEgDzzU:APA91bEkITOc5PMGLwAwyoUtMFF7vCcNBikr30eUW6HglasaSBdqtQEzb9NtKR_fZrVY-yw0ZicDdeSi7ptWKpB_tcxVTX_a55EFgXg-_MgoqQn8uGcrad4jHr_eNvKzgBkFB6cPp45A", proxy_dict=proxy_dict)
+#             }
+#     push_service = FCMNotification(api_key="AAAAbEgDzzU:APA91bEkITOc5PMGLwAwyoUtMFF7vCcNBikr30eUW6HglasaSBdqtQEzb9NtKR_fZrVY-yw0ZicDdeSi7ptWKpB_tcxVTX_a55EFgXg-_MgoqQn8uGcrad4jHr_eNvKzgBkFB6cPp45A", proxy_dict=proxy_dict)
 
-    # Your api-key can be gotten from:  https://console.firebase.google.com/project/<project-name>/settings/cloudmessaging
+#     # Your api-key can be gotten from:  https://console.firebase.google.com/project/<project-name>/settings/cloudmessaging
 
-    registration_id = "fB5hluUNGlg:APA91bFJz5kkoTLpZF6giEW3hnpU_Q4MMqkQwVrUI7SB8BOyfT0k_v2CimFEuoZXm9AHsg8y5KF-O2dEfOBuqt6Rqb6OFR7sN-eV6moy0FOcOwpJf9Kv2DynI1da77E3hXtiDNJpv43N"
-    message_title = "Update in Schedule"
-    message_body = "Schedule updated for FINALE"
+#     registration_id = "fB5hluUNGlg:APA91bFJz5kkoTLpZF6giEW3hnpU_Q4MMqkQwVrUI7SB8BOyfT0k_v2CimFEuoZXm9AHsg8y5KF-O2dEfOBuqt6Rqb6OFR7sN-eV6moy0FOcOwpJf9Kv2DynI1da77E3hXtiDNJpv43N"
+#     message_title = "Update in Schedule"
+#     message_body = "Schedule updated for FINALE"
 
 
-    data_message ={"title" : "The da vinci code",
-    "description" : "wfwgf wfwefwgbiwgwigubwigi wugwiugwuig",
-    "timestamp" : str(int(time.time())),
-    "author": "issued by Sanskar"}
+#     data_message ={"title" : "The da vinci code",
+#     "description" : "wfwgf wfwefwgbiwgwigubwigi wugwiugwuig",
+#     "timestamp" : str(int(time.time())),
+#     "author": "issued by Sanskar"}
 
-    #result = push_service.notify_single_device(registration_id=registration_id, message_title=message_title, message_body=message_body)
-    result = push_service.notify_single_device(registration_id=registration_id, message_body=message_body, data_message=data_message)
-    print(result)
-    print("\n\n")
+#     #result = push_service.notify_single_device(registration_id=registration_id, message_title=message_title, message_body=message_body)
+#     result = push_service.notify_single_device(registration_id=registration_id, message_body=message_body, data_message=data_message)
+#     print(result)
+#     print("\n\n")
 
-    return render_template("index.html")
+#     return render_template("index.html")
+
+############# project resumed on 09022018  ###############
 
