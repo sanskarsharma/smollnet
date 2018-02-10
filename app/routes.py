@@ -1,29 +1,34 @@
 from app import app_instance, db_instance
 from flask import render_template, flash, redirect, url_for, request
-from app.forms import LoginForm, RegistrationForm, EditProfileForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm
+from app.models import User, Post
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
 from werkzeug.urls import url_parse
 from datetime import datetime
 import time
 
 from pyfcm import FCMNotification
 
-@app_instance.route('/')
-@app_instance.route('/index')       		# these are called decorators
+@app_instance.route('/', methods=["GET", "POST"])
+@app_instance.route('/index', methods=["GET","POST"])# these are called decorators
 @login_required
-def index():		                # this is called a view function
-	posts = [
-        {
-            'author': {'username': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-        {
-            'author': {'username': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        }
-    ]
-	return render_template("index.html", title = "Our Home Page", postslist = posts)
+def index():# this is called a view function
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(body=form.post.data, author=current_user)
+        db_instance.session.add(post)
+        db_instance.session.commit()
+        flash('Your post is now live!')
+        return redirect(url_for('index'))
+
+    page = request.args.get("page",1, type=int)
+    posts = current_user.followed_posts().paginate(page,app_instance.config["POSTS_PER_PAGE"],False)
+    next_url = url_for('index', page=posts.next_num) \
+        if posts.has_next else None
+    prev_url = url_for('index', page=posts.prev_num) \
+        if posts.has_prev else None
+    return render_template("index.html", title = "Home Page", postslist = posts.items, form=form, next_url=next_url,prev_url=prev_url)
+
 
 
 
@@ -70,11 +75,14 @@ def register_user():
 @login_required
 def user_profile(username):
     user_obj = User.query.filter_by(username= username).first_or_404()
-    posts = [
-        {'author': user_obj, 'body': 'Test post #1'},
-        {'author': user_obj, 'body': 'Test post #2'}
-    ]
-    return render_template("user_profile.html", user = user_obj, posts = posts)
+    page = request.args.get('page', 1, type=int)
+    posts = user_obj.posts.order_by(Post.timestamp.desc()).paginate(
+        page, app_instance.config['POSTS_PER_PAGE'], False)
+    next_url = url_for('user_profile', username=user_obj.username, page=posts.next_num) \
+        if posts.has_next else None
+    prev_url = url_for('user_profile', username=user_obj.username, page=posts.prev_num) \
+        if posts.has_prev else None
+    return render_template("user_profile.html", user = user_obj, posts = posts.items, next_url=next_url,prev_url=prev_url)
 
 
 # using this functionality to add last seen feature in our app, whenever a user sends any request it records time
@@ -131,5 +139,47 @@ def edit_profile():
 
 #     return render_template("index.html")
 
-############# project resumed on 09022018  ###############
+############# project resumed on 10022018  ###############
+
+@app_instance.route("/follow/<username>")
+@login_required
+def follow(username):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        flash('User {} not found.'.format(username))
+        return redirect(url_for('index'))
+    if user == current_user:
+        flash('You cannot follow yourself!')
+        return redirect(url_for('user_profile', username=username))
+
+    current_user.follow(user)
+    db_instance.session.commit()
+    flash('You are following {}!'.format(username))
+    return redirect(url_for('user_profile', username=username))
+
+@app_instance.route('/unfollow/<username>')
+@login_required
+def unfollow(username):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        flash('User {} not found.'.format(username))
+        return redirect(url_for('index'))
+    if user == current_user:
+        flash('You cannot unfollow yourself!')
+        return redirect(url_for('user_profile', username=username))
+    current_user.unfollow(user)
+    db_instance.session.commit()
+    flash('You are not following {}.'.format(username))
+    return redirect(url_for('user_profile', username=username))
+
+@app_instance.route("/explore")
+@login_required
+def explore():
+    page = request.args.get("page",1, type=int)
+    posts = Post.query.order_by(Post.timestamp.desc()).paginate(page, app_instance.config['POSTS_PER_PAGE'], False)    
+    next_url = url_for('explore', page=posts.next_num) \
+        if posts.has_next else None
+    prev_url = url_for('explore', page=posts.prev_num) \
+        if posts.has_prev else None
+    return render_template('index.html', title='Explore', postslist=posts.items, next_url=next_url,prev_url=prev_url)
 

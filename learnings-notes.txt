@@ -7,3 +7,15 @@ chapter 7 error handling :https://blog.miguelgrinberg.com/post/the-flask-mega-tu
 -> configuring mail server/ mail account to send emails on server errors
 -> log files using RotatingFileHandler 
 
+chap 8 followers :  https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-viii-followers
+-> types of relationships in rdbms : one-to-many, many-to-one, many-to-many
+-> followers is self-referential relationship of type many-to-many
+-> association table, auxillary tables
+-> python unittest module
+
+chap 9 pagination : 
+-> added form for adding posts
+-> POST/REDIRECT/GET pattern used for forms
+->
+
+
