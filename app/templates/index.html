@@ -19,7 +19,7 @@
         `{% endif %}
 
         {% for post in postslist %}
-        <div><p>{{post.author.username}} says : {{post.body}}</p></div>
+        {% include "_post.html" %}
         {%endfor%}
 
         {% if prev_url %}
