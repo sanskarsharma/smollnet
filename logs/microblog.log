@@ -54,3 +54,7 @@ NameError: name 'app' is not defined
  		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
 2018-02-11 23:25:57,294 INFO: Microblog startup 
  		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
+2018-02-15 01:20:50,654 INFO: Microblog startup 
+ 		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
+2018-02-15 01:53:14,098 INFO: Microblog startup 
+ 		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
