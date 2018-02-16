@@ -4,4 +4,6 @@ app/__pycache__
 migrations/__pycache__ 
 pehla_virtualenv 
 pehla_virtualenv/ 
-__pycache__ 
+__pycache__
+virtenv
+config.pyc pehlaflaskapp.pyc wsgi.pyc

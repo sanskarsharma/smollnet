@@ -1,60 +1,48 @@
-2018-02-11 03:10:16,688 ERROR: Exception on /user/demo_acc_one [GET] 
- 		 [in e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\flask\app.py:1560]
+2018-02-17 01:22:26,839 ERROR: Exception on /login [GET] 
+ 		 [in /home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask/app.py:1560]
 Traceback (most recent call last):
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\flask\app.py", line 1982, in wsgi_app
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask/app.py", line 1982, in wsgi_app
     response = self.full_dispatch_request()
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\flask\app.py", line 1614, in full_dispatch_request
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask/app.py", line 1614, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\flask\app.py", line 1517, in handle_user_exception
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask/app.py", line 1517, in handle_user_exception
     reraise(exc_type, exc_value, tb)
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\flask\_compat.py", line 33, in reraise
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask/_compat.py", line 33, in reraise
     raise value
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask/app.py", line 1612, in full_dispatch_request
     rv = self.dispatch_request()
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask/app.py", line 1598, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\flask_login\utils.py", line 261, in decorated_view
-    return func(*args, **kwargs)
-  File "E:\Python Course\flask\pehlaFlask\app\routes.py", line 80, in user_profile
-    page, app.config['POSTS_PER_PAGE'], False)
-NameError: name 'app' is not defined
-2018-02-11 03:11:12,445 INFO: Microblog startup 
- 		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
-2018-02-11 03:13:23,619 INFO: Microblog startup 
- 		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
-2018-02-11 21:46:43,737 INFO: Microblog startup 
- 		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
-2018-02-11 21:47:32,822 INFO: Microblog startup 
- 		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
-2018-02-11 21:48:46,500 INFO: Microblog startup 
- 		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
-2018-02-11 21:49:03,396 INFO: Microblog startup 
- 		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
-2018-02-11 22:36:34,951 INFO: Microblog startup 
- 		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
-2018-02-11 22:56:41,218 INFO: Microblog startup 
- 		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
-2018-02-11 22:56:51,451 INFO: Microblog startup 
- 		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
-2018-02-11 23:18:48,191 INFO: Microblog startup 
- 		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
-2018-02-11 23:19:41,929 INFO: Microblog startup 
- 		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
-2018-02-11 23:20:26,116 INFO: Microblog startup 
- 		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
-2018-02-11 23:20:57,318 INFO: Microblog startup 
- 		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
-2018-02-11 23:21:43,002 INFO: Microblog startup 
- 		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
-2018-02-11 23:22:51,920 INFO: Microblog startup 
- 		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
-2018-02-11 23:24:10,420 INFO: Microblog startup 
- 		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
-2018-02-11 23:24:44,824 INFO: Microblog startup 
- 		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
-2018-02-11 23:25:57,294 INFO: Microblog startup 
- 		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
-2018-02-15 01:20:50,654 INFO: Microblog startup 
- 		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
-2018-02-15 01:53:14,098 INFO: Microblog startup 
- 		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
+  File "/home/hadoop/development_projects/python/flask_microblog/app/routes.py", line 40, in login
+    form_obj = LoginForm()
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/wtforms/form.py", line 212, in __call__
+    return type.__call__(cls, *args, **kwargs)
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask_wtf/form.py", line 88, in __init__
+    super(FlaskForm, self).__init__(formdata=formdata, **kwargs)
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/wtforms/form.py", line 278, in __init__
+    self.process(formdata, obj, data=data, **kwargs)
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/wtforms/form.py", line 132, in process
+    field.process(formdata)
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/wtforms/csrf/core.py", line 43, in process
+    self.current_token = self.csrf_impl.generate_csrf_token(self)
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask_wtf/csrf.py", line 134, in generate_csrf_token
+    token_key=self.meta.csrf_field_name
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask_wtf/csrf.py", line 47, in generate_csrf
+    setattr(g, field_name, s.dumps(session[field_name]))
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/itsdangerous.py", line 565, in dumps
+    payload = want_bytes(self.dump_payload(obj))
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/itsdangerous.py", line 847, in dump_payload
+    json = super(URLSafeSerializerMixin, self).dump_payload(obj)
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/itsdangerous.py", line 550, in dump_payload
+    return want_bytes(self.serializer.dumps(obj))
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/itsdangerous.py", line 51, in dumps
+    return json.dumps(obj, separators=(',', ':'))
+  File "/usr/lib/python3.6/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/usr/lib/python3.6/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/lib/python3.6/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/usr/lib/python3.6/json/encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'bytes' is not JSON serializable

@@ -1,80 +1,96 @@
-2018-01-22 14:54:03,192 INFO: Microblog startup [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
-2018-01-22 15:00:01,443 INFO: Microblog startup 
- [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
-2018-01-22 15:02:54,089 ERROR: Exception on /edit_profile [POST] 
- [in e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\flask\app.py:1560]
+2018-02-17 00:58:07,406 ERROR: Exception on /login [GET] 
+ 		 [in /home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask/app.py:1560]
 Traceback (most recent call last):
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\sqlalchemy\engine\base.py", line 1193, in _execute_context
-    context)
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\sqlalchemy\engine\default.py", line 507, in do_execute
-    cursor.execute(statement, parameters)
-sqlite3.IntegrityError: UNIQUE constraint failed: user.username
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\flask\app.py", line 1982, in wsgi_app
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask/app.py", line 1982, in wsgi_app
     response = self.full_dispatch_request()
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\flask\app.py", line 1614, in full_dispatch_request
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask/app.py", line 1614, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\flask\app.py", line 1517, in handle_user_exception
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask/app.py", line 1517, in handle_user_exception
     reraise(exc_type, exc_value, tb)
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\flask\_compat.py", line 33, in reraise
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask/_compat.py", line 33, in reraise
     raise value
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask/app.py", line 1612, in full_dispatch_request
     rv = self.dispatch_request()
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask/app.py", line 1598, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\flask_login\utils.py", line 261, in decorated_view
-    return func(*args, **kwargs)
-  File "E:\Python Course\flask\pehlaFlask\app\routes.py", line 92, in edit_profile
-    db_instance.session.commit()
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\sqlalchemy\orm\scoping.py", line 153, in do
-    return getattr(self.registry(), name)(*args, **kwargs)
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\sqlalchemy\orm\session.py", line 937, in commit
-    self.transaction.commit()
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\sqlalchemy\orm\session.py", line 461, in commit
-    self._prepare_impl()
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\sqlalchemy\orm\session.py", line 441, in _prepare_impl
-    self.session.flush()
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\sqlalchemy\orm\session.py", line 2237, in flush
-    self._flush(objects)
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\sqlalchemy\orm\session.py", line 2363, in _flush
-    transaction.rollback(_capture_exception=True)
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 66, in __exit__
-    compat.reraise(exc_type, exc_value, exc_tb)
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\sqlalchemy\util\compat.py", line 187, in reraise
+  File "/home/hadoop/development_projects/python/flask_microblog/app/routes.py", line 40, in login
+    form_obj = LoginForm()
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/wtforms/form.py", line 212, in __call__
+    return type.__call__(cls, *args, **kwargs)
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask_wtf/form.py", line 88, in __init__
+    super(FlaskForm, self).__init__(formdata=formdata, **kwargs)
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/wtforms/form.py", line 278, in __init__
+    self.process(formdata, obj, data=data, **kwargs)
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/wtforms/form.py", line 132, in process
+    field.process(formdata)
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/wtforms/csrf/core.py", line 43, in process
+    self.current_token = self.csrf_impl.generate_csrf_token(self)
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask_wtf/csrf.py", line 134, in generate_csrf_token
+    token_key=self.meta.csrf_field_name
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask_wtf/csrf.py", line 47, in generate_csrf
+    setattr(g, field_name, s.dumps(session[field_name]))
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/itsdangerous.py", line 565, in dumps
+    payload = want_bytes(self.dump_payload(obj))
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/itsdangerous.py", line 847, in dump_payload
+    json = super(URLSafeSerializerMixin, self).dump_payload(obj)
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/itsdangerous.py", line 550, in dump_payload
+    return want_bytes(self.serializer.dumps(obj))
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/itsdangerous.py", line 51, in dumps
+    return json.dumps(obj, separators=(',', ':'))
+  File "/usr/lib/python3.6/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/usr/lib/python3.6/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/lib/python3.6/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/usr/lib/python3.6/json/encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'bytes' is not JSON serializable
+2018-02-17 00:58:10,763 ERROR: Exception on /login [GET] 
+ 		 [in /home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask/app.py:1560]
+Traceback (most recent call last):
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask/_compat.py", line 33, in reraise
     raise value
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\sqlalchemy\orm\session.py", line 2327, in _flush
-    flush_context.execute()
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 391, in execute
-    rec.execute(self)
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 556, in execute
-    uow
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\sqlalchemy\orm\persistence.py", line 177, in save_obj
-    mapper, table, update)
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\sqlalchemy\orm\persistence.py", line 768, in _emit_update_statements
-    execute(statement, multiparams)
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\sqlalchemy\engine\base.py", line 948, in execute
-    return meth(self, multiparams, params)
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\sqlalchemy\sql\elements.py", line 269, in _execute_on_connection
-    return connection._execute_clauseelement(self, multiparams, params)
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\sqlalchemy\engine\base.py", line 1060, in _execute_clauseelement
-    compiled_sql, distilled_params
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\sqlalchemy\engine\base.py", line 1200, in _execute_context
-    context)
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\sqlalchemy\engine\base.py", line 1413, in _handle_dbapi_exception
-    exc_info
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\sqlalchemy\util\compat.py", line 203, in raise_from_cause
-    reraise(type(exception), exception, tb=exc_tb, cause=cause)
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\sqlalchemy\util\compat.py", line 186, in reraise
-    raise value.with_traceback(tb)
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\sqlalchemy\engine\base.py", line 1193, in _execute_context
-    context)
-  File "e:\python course\flask\pehlaflask\pehla_virtualenv\lib\site-packages\sqlalchemy\engine\default.py", line 507, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: user.username [SQL: 'UPDATE user SET username=? WHERE user.id = ?'] [parameters: ('sanskar', 13)] (Background on this error at: http://sqlalche.me/e/gkpj)
-2018-01-22 15:06:44,055 INFO: Microblog startup 
- 		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
-2018-01-25 11:03:42,807 INFO: Microblog startup 
- 		 [in E:\Python Course\flask\pehlaFlask\app\__init__.py:49]
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/hadoop/development_projects/python/flask_microblog/app/routes.py", line 40, in login
+    form_obj = LoginForm()
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/wtforms/form.py", line 212, in __call__
+    return type.__call__(cls, *args, **kwargs)
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask_wtf/form.py", line 88, in __init__
+    super(FlaskForm, self).__init__(formdata=formdata, **kwargs)
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/wtforms/form.py", line 278, in __init__
+    self.process(formdata, obj, data=data, **kwargs)
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/wtforms/form.py", line 132, in process
+    field.process(formdata)
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/wtforms/csrf/core.py", line 43, in process
+    self.current_token = self.csrf_impl.generate_csrf_token(self)
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask_wtf/csrf.py", line 134, in generate_csrf_token
+    token_key=self.meta.csrf_field_name
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/flask_wtf/csrf.py", line 47, in generate_csrf
+    setattr(g, field_name, s.dumps(session[field_name]))
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/itsdangerous.py", line 565, in dumps
+    payload = want_bytes(self.dump_payload(obj))
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/itsdangerous.py", line 847, in dump_payload
+    json = super(URLSafeSerializerMixin, self).dump_payload(obj)
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/itsdangerous.py", line 550, in dump_payload
+    return want_bytes(self.serializer.dumps(obj))
+  File "/home/hadoop/development_projects/python/flask_microblog/virtenv/lib/python3.6/site-packages/itsdangerous.py", line 51, in dumps
+    return json.dumps(obj, separators=(',', ':'))
+  File "/usr/lib/python3.6/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/usr/lib/python3.6/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/lib/python3.6/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/usr/lib/python3.6/json/encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'bytes' is not JSON serializable
