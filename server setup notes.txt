@@ -1,0 +1,84 @@
+
+
+# Virtual env
+Be very careful and specific about its installation, loading libs and activation.
+MAKE SURE what python version is being used while creating VirtualEnvironment, server may have many versions and it may fuck with your app later in the virtualenv if you don't pay attention now. USE THE SAME PYTHON VERSION THROUGHT THE COMPLETE PROJECT/APP
+read this full : https://gist.github.com/Geoyi/d9fab4f609e9f75941946be45000632b
+imp bookmarks regarding this and the whole setup in ubuntu chrome on lappy
+
+setup tutorial from digitalocean : https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-16-04
+
+# create a systemd service file to run gunicorn in directory : /etc/systemd/system
+-> command : sudo nano/gedit flask_microblog.service
+-> contents :
+
+####
+
+[Unit]
+Description=Gunicorn instance to serve flask_microblog
+After=network.target
+
+[Service]
+User=hadoop
+Group=www-data
+WorkingDirectory=/home/hadoop/development_projects/python/flask_microblog
+Environment="PATH=/home/hadoop/development_projects/python/flask_microblog/virtenv/bin"
+ExecStart=/home/hadoop/development_projects/python/flask_microblog/virtenv/bin/gunicorn --workers 3 --bind unix:flask_microblog.sock -m 007 wsgi:app_instance
+
+[Install]
+WantedBy=multi-user.target
+
+####
+
+
+-> then start the service and enable it via :
+-> sudo systemctl start flask_microblog
+-> sudo systemctl enable flask_microblog
+
+other commands :
+-> sudo systemctl daemon-restart  # after editing service file
+-> service flask_microblog start
+-> service flask_microblog stop
+-> service flask_microblog status
+
+IMP: make modifications in service script so that service starts/stop on server reboot etc, in short : automate stuff, do same for nginx .
+
+
+
+# create nginx config file to use it as reverse proxy for gunicorn , directory : /etc/nginx/sites-available/flask_microblog
+
+-> command : sudo nano flask_microblog.config
+-> contents :
+
+####
+
+server {
+    listen 5000;
+    server_name 127.0.0.1;
+    
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/hadoop/development_projects/python/flask_microblog/flask_microblog.sock;
+    }
+}
+
+####
+
+->To enable the Nginx server block configuration we've just created, link the file to the sites-enabled directory:
+command : sudo ln -s /etc/nginx/sites-available/flask_microblog.config /etc/nginx/sites-enabled
+
+-> testing nginx config : sudo nginx -t
+-> retstart using : sudo systemctl restart nginx
+
+Note:
+apache2 server may be running by default on ubuntu and may interfere with nginx installation/run
+to disable it : $ sudo systemctl stop apache2.service
+to double check : $ sudo systemctl status apache2.service
+IF the apache server is default and this is the case, then you need to write service/script or delete apache configs to start/stop nginx on server reboot etc in production. Google krlena abi chd.
+
+
+
+# about database
+setup is almost same as of iiit project
+- export db as .sql from phpmyadmin etc and import on server
+- see the server terminal screenshots kept in windows desktop/stuff
