@@ -7,3 +7,4 @@ pehla_virtualenv/
 __pycache__
 virtenv
 config.pyc pehlaflaskapp.pyc wsgi.pyc
+logs

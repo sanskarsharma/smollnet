@@ -1,10 +1,11 @@
-from app import db_instance, login_manager_instance
+from app import db_instance, login_manager_instance, app_instance
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from app import login_manager_instance
 from hashlib import md5
 
+import jwt
+from time import time
 
 followers = db_instance.Table("followers",
     db_instance.Column("follower_id", db_instance.Integer, db_instance.ForeignKey("user.id")),
@@ -64,6 +65,20 @@ class User(UserMixin, db_instance.Model):
         own_posts = Post.query.filter_by(user_id= self.id)
         combined = posts.union(own_posts).order_by(Post.timestamp.desc())
         return combined
+
+
+    def get_reset_password_token(self, expires_in=600):
+        return jwt.encode(
+            {'reset_password': self.id, 'exp': time() + expires_in},
+            app_instance.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
+
+    @staticmethod
+    def verify_reset_password_token(token):
+        try:
+            id = jwt.decode(token, app_instance.config['SECRET_KEY'],algorithms=['HS256'])['reset_password']
+        except:
+            return
+        return User.query.get(id)
             
     
     

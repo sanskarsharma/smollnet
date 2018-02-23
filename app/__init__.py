@@ -8,9 +8,13 @@ import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 import os
 
+from flask_mail import Mail
+
 app_instance = Flask(__name__)
 app_instance.config.from_object(Config)			# setting the Config class from config.py module in our flask app object (app_instance)
 												# NOW our flask app (or our app_instance) knows where to look for config variables (i.e in object of Config class)
+
+mail_instance = Mail(app_instance)
 
 db_instance = SQLAlchemy(app_instance)
 migrate = Migrate(app_instance, db_instance)
@@ -22,6 +26,7 @@ from app import routes, models, errors			 	# this "app" means app naam ka packag
 if not app_instance.debug:
 
 		# to be used when using a mail server along with flask server
+		####  FOR SENDING SERVER ERROR MAILS TO SITE ADMINS
 		# if app_instance.config['MAIL_SERVER']:
 		# 	auth = None
 		# 	if app_instance.config['MAIL_USERNAME'] or app_instance.config['MAIL_PASSWORD']:
@@ -36,6 +41,7 @@ if not app_instance.debug:
 		# 		credentials=auth, secure=secure)
 		# 	mail_handler.setLevel(logging.ERROR)
 		# 	app_instance.logger.addHandler(mail_handler)
+
 
 		# below code is for writing log files
 		if not os.path.exists('logs'):
