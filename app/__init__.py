@@ -9,12 +9,14 @@ from logging.handlers import SMTPHandler, RotatingFileHandler
 import os
 
 from flask_mail import Mail
+from flask_bootstrap import Bootstrap
 
 app_instance = Flask(__name__)
 app_instance.config.from_object(Config)			# setting the Config class from config.py module in our flask app object (app_instance)
 												# NOW our flask app (or our app_instance) knows where to look for config variables (i.e in object of Config class)
 
 mail_instance = Mail(app_instance)
+bootstrap = Bootstrap(app_instance)
 
 db_instance = SQLAlchemy(app_instance)
 migrate = Migrate(app_instance, db_instance)
