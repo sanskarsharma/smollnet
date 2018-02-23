@@ -20,7 +20,7 @@ def send_async_email(app_instance, msg):
 
 def send_password_reset_email(user):
     token = user.get_reset_password_token()
-    send_email(subject = '[MindBlog] Reset Your Password',
+    send_email(subject = '[smollnet] Reset Your Password',
                sender= app_instance.config['ADMINS'][0],
                recipients= [user.email],
                text_body= render_template('email/reset_password_mail.txt', user=user, token=token),

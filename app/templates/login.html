@@ -8,14 +8,28 @@
     <div class="row">
         <div class="col-md-4">
             {{ wtf.quick_form(form) }}
+            <br>
+            <p>
+                Forgot Your Password?
+                <a href="{{ url_for('reset_password_request') }}">Click to Reset It</a>
+            </p>
+            <p>
+                New User? 
+                <a href="{{ url_for('register_user') }}">Click to Register!</a>
+            </p>
+
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+            <img src="../static/login.png" style="padding: 0;
+                    display: block;
+                    margin: 0 auto;
+                    max-height: 100%;
+                    max-width: 100%;">
         </div>
     </div>
     <br>
-    <p>New User? <a href="{{ url_for('register_user') }}">Click to Register!</a></p>
-    <p>
-        Forgot Your Password?
-        <a href="{{ url_for('reset_password_request') }}">Click to Reset It</a>
-    </p>
+    
 {% endblock %}
 
 
