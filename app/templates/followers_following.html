@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+
+<div class="row">
+    <div class="col-md-1">
+        <a href="{{ url_for('user_profile', username=person.username) }}">
+            <img src="{{ person.avatar(96) }}" class="img-rounded img-responsive"/>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <h3> 
+        <a href="{{ url_for('user_profile', username=person.username) }}">
+             @{{ person.username }}
+        </a>
+        </h3>
+    </div>   
+</div>
+<div class="row">
+    <div class="col-md-12">
+        {% if heading=="followers" %}
+        <h3> {{ heading }} ({{ person.followers.count() }}) </h3>
+        {% endif %}
+
+        {% if heading=="following" %}
+        <h3> {{ heading }} ({{ person.followed.count() }}) </h3>
+        {% endif %}
+
+    </div>
+</div>
+
+{% if heading=="followers" %}
+{% for user in person.followers %}
+    {% include "_user.html" %}
+{% endfor%}
+{% endif %}
+
+{% if heading=="following" %}
+{% for user in person.followed %}
+    {% include "_user.html" %}
+{% endfor%}
+{% endif %}
+
+
+{% endblock %}

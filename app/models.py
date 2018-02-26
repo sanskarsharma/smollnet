@@ -55,6 +55,11 @@ class User(UserMixin, db_instance.Model):
         if self.is_following(user):
             self.followed.remove(user)
 
+    # to get list of Users who follow the logged in user, added later 
+    # def get_followers(self):
+    #      return User.query.join(followers,(followers.c.follower_id == User.id)).filter(
+    #          followers.c.followed_id == self.id)
+    # THE ABOVE METHOD WAS NOT NEEDED AS User CLASS HAS ALREADY BOTH followed AND follower(via backref) ATTRIBUTES
 
     def followed_posts(self):
         posts = Post.query.join(

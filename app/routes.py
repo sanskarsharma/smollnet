@@ -215,3 +215,24 @@ def reset_password(token):
         flash('Your password has been reset.')
         return redirect(url_for('login'))
     return render_template('reset_password.html', form=form)
+
+@app_instance.route("/test", methods=["POST","GET"])
+def testing():
+    return "jquery works like charm"
+
+
+
+@app_instance.route("/user/<username>/followers")
+@login_required
+def get_followers(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    # followers = user.get_followers()
+    # we already have a followers attribute of user class via backref, dumb cunt.
+    return render_template("followers_following.html", person=user, heading="followers")
+
+@app_instance.route("/user/<username>/following")
+@login_required
+def get_following(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    return render_template("followers_following.html", person=user, heading="following")
+    

@@ -1,0 +1,18 @@
+
+<table class="table table-hover">
+    <tr>
+        <td width="64px">
+            <a href="{{ url_for('user_profile', username=user.username) }}">
+                <img src="{{ user.avatar(64) }}" class="img-rounded" />
+            </a>
+        </td>
+        <td>
+            <a href="{{ url_for('user_profile', username=user.username) }}">
+                @{{ user.username }}
+            </a>
+            was online {{ moment(user.last_seen).fromNow() }}:
+            <br>
+            bio : {{ user.about_me }}
+        </td>
+    </tr>
+</table>
