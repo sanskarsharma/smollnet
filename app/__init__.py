@@ -12,13 +12,20 @@ from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 
+from celery import Celery
+
 app_instance = Flask(__name__)
 app_instance.config.from_object(Config)			# setting the Config class from config.py module in our flask app object (app_instance)
-												# NOW our flask app (or our app_instance) knows where to look for config variables (i.e in object of Config class)
+app_instance.debug = False												# NOW our flask app (or our app_instance) knows where to look for config variables (i.e in object of Config class)
+# DEBUG MODE IS off
 
 mail_instance = Mail(app_instance)
 bootstrap = Bootstrap(app_instance)
 moment = Moment(app_instance)
+
+# celery
+celery = Celery(app_instance.name, broker=app_instance.config['CELERY_BROKER_URL'])
+celery.conf.update(app_instance.config)
 
 db_instance = SQLAlchemy(app_instance)
 migrate = Migrate(app_instance, db_instance)

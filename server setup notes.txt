@@ -85,3 +85,28 @@ IF the apache server is default and this is the case, then you need to write ser
 setup is almost same as of iiit project
 - export db as .sql from phpmyadmin etc and import on server
 - see the server terminal screenshots kept in windows desktop/stuff
+
+
+# about Celery & Redis
+Celery is used with Redis as broker (task-queue)
+Celery is an asynchronous task queue, used to execute tasks outside of the context of your application. The general idea is that any resource consuming tasks that your application may need to run can be offloaded to the task queue.
+Celery installation has three core components:
+1) The Celery client - This is used to issue background jobs. When working with Flask, the client runs with the Flask application.
+2) The Celery workers - These are the processes that run the background jobs. Celery supports local and remote workers, so you can start with a single worker running on the same machine as the Flask server, and later add more workers as the needs of your application grow.
+3) The message broker - The client communicates with the the workers through a message queue, and Celery supports several ways to implement these queues. The most commonly used brokers are RabbitMQ and Redis.
+
+http://aviaryan.in/blog/gsoc/celery-flask-using.html
+https://blog.miguelgrinberg.com/post/using-celery-with-flask
+
+Redis and Celery run as separate services outside scope of flask app on your server.
+Set them up separately on server.
+They also need to be started separately.
+
+REDIS
+-> Bash script to download and start REDIS is included in repo as "redis_dwnld_and_run_script"
+-> Another better way to run redis on server is to make it a daemon process i.e a linux service
+    Tutorial for it - https://www.digitalocean.com/community/tutorials/how-to-install-and-use-redis
+In short, after installing redis -> cd redis-folder/utils -> ./install_server.sh
+That script will confirm some config values required, we can keep them default as proposed by the script. Just need to specify path of "redis-server.sh" script which is in /redis-folder/src
+
+CELERY
