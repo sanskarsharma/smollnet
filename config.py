@@ -27,7 +27,7 @@ class Config(object):
 	MAIL_PASSWORD = "8349402007"
 	ADMINS = ['iiitsparkpark@gmail.com']
 
-	POSTS_PER_PAGE = 10
+	POSTS_PER_PAGE = 15
 
 	# celery config
 	CELERY_BROKER_URL = "redis://localhost:6379/0"

@@ -1,7 +1,5 @@
 
-//command to install setuptools(req by pip) on DO server
-python3 -m pip install --upgrade pip3 setuptools wheel
-
+# start celery ; check redis, nginx & gunicorn ;
 
 # Virtual env
 Be very careful and specific about its installation, loading libs and activation.
@@ -10,6 +8,10 @@ read this full : https://gist.github.com/Geoyi/d9fab4f609e9f75941946be45000632b
 imp bookmarks regarding this and the whole setup in ubuntu chrome on lappy
 
 setup tutorial from digitalocean : https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-16-04
+
+command to install setuptools(req by pip) on DO server
+python3 -m pip install --upgrade pip3 setuptools wheel
+
 
 # create a systemd service file to run gunicorn in directory : /etc/systemd/system
 -> command : sudo nano/gedit flask_microblog.service
@@ -110,3 +112,12 @@ In short, after installing redis -> cd redis-folder/utils -> ./install_server.sh
 That script will confirm some config values required, we can keep them default as proposed by the script. Just need to specify path of "redis-server.sh" script which is in /redis-folder/src
 
 CELERY
+start celery after redis. if redis is runnning daemon, don't.
+Command to run celery -> celery worker -A app.celery
+
+
+
+# All services here
+service nginx status            # nginx server
+service flask_microblog status  # our gunicorn instance
+service redis_6379 status       # redis server

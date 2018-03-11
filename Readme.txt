@@ -1,3 +1,8 @@
+
+## to-do
+- make _post responsive by replacing table with divs
+- see astha's posts for more todos
+
 ################____Install Notes____#################
 # virtual environment for this project
 virtualenvironment is not added to git, create one where you clone this project.
