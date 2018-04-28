@@ -1,6 +1,7 @@
 
 ## to-do
-- make _post responsive by replacing table with divs
+- make _post.html responsive for phones by replacing table with divs
+- do same with user_profile.html
 - see astha's posts for more todos
 
 ################____Install Notes____#################
