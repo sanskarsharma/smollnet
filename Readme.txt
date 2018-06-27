@@ -1,15 +1,7 @@
 
-## to-do
-- make _post.html responsive for phones by replacing table with divs
-- do same with user_profile.html
-- see astha's posts for more todos
-
 ################____Install Notes____#################
-# virtual environment for this project
-virtualenvironment is not added to git, create one where you clone this project.
-In this repo, the virtual environment folder is already added to .gitignore file so to carry on this legacy of not including virtualenvironment in git repo,
-just name your new virtualenvironment as "pehla_virtualenv" as this folder name is already added to .gitignore
 
+# virtual environment for this project
 to make a virtualenvironment use command : python -m venv <virtual_env_name>
 then to install all dependencies : 
 1) activate your venv
@@ -38,3 +30,6 @@ this project uses SQLAlchemy orm, can be configured for any sql database.
 currently configured for using mysql server, earlier was using sqlite - hence the app.db file in repo
 to change db uri or db altogether, see config.py and the "SQLALCHEMY_DATABASE_URI" variable in it.
 
+Note:
+In this repo, the virtual environment folder is already added to .gitignore file so to carry on this legacy of not including virtualenvironment in git repo,
+just name your new virtualenvironment as "pehla_virtualenv" as this folder name is already added to .gitignore

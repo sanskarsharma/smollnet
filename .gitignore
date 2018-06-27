@@ -8,3 +8,5 @@ __pycache__
 virtenv
 config.pyc pehlaflaskapp.pyc wsgi.pyc
 logs
+.env
+db_files/

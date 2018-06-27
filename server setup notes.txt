@@ -7,8 +7,10 @@ MAKE SURE what python version is being used while creating VirtualEnvironment, s
 read this full : https://gist.github.com/Geoyi/d9fab4f609e9f75941946be45000632b
 imp bookmarks regarding this and the whole setup in ubuntu chrome on lappy
 
+##
 setup tutorial from digitalocean : https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-16-04
 
+##
 command to install setuptools(req by pip) on DO server
 python3 -m pip install --upgrade pip3 setuptools wheel
 
@@ -75,6 +77,7 @@ command : sudo ln -s /etc/nginx/sites-available/flask_microblog.config /etc/ngin
 -> testing nginx config : sudo nginx -t
 -> retstart using : sudo systemctl restart nginx
 
+##
 Note:
 apache2 server may be running by default on ubuntu and may interfere with nginx installation/run
 to disable it : $ sudo systemctl stop apache2.service
@@ -85,7 +88,7 @@ IF the apache server is default and this is the case, then you need to write ser
 
 # about database
 setup is almost same as of iiit project
-- export db as .sql from phpmyadmin etc and import on server
+- export db as .sql from phpmyadmin/workbench etc and import on server
 - see the server terminal screenshots kept in windows desktop/stuff
 
 
