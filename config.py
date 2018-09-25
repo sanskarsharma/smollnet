@@ -4,15 +4,19 @@ from dotenv import load_dotenv
 basedir = os.path.abspath(os.path.dirname(__file__))
 load_dotenv(os.path.join(basedir, '.env'))
 
+
 class Config(object):
 	SECRET_KEY = os.environ.get("SECRET_KEY") or "fallback-secret-key-which-you-cannot-guess"
 
 	MYSQL_DB_USERNAME = os.environ.get("MYSQL_DB_USERNAME")
 	MYSQL_DB_PASSWORD = os.environ.get("MYSQL_DB_PASSWORD")
-	SQLALCHEMY_DATABASE_URI = "mysql+pymysql://" + MYSQL_DB_USERNAME + ":" + MYSQL_DB_PASSWORD + "@localhost/flaskdb"
-	
-	#os.environ.get("DATABASE_URL") or \
-        #'sqlite:///' + os.path.join(basedir, 'app.db')
+	MYSQL_DB_HOST = os.environ.get("MYSQL_DB_HOST")
+	MYSQL_DB_NAME = os.environ.get("MYSQL_DB_NAME")
+
+	SQLALCHEMY_DATABASE_URI = "mysql+pymysql://" + MYSQL_DB_USERNAME + ":" + MYSQL_DB_PASSWORD + "@" + MYSQL_DB_HOST + "/" + MYSQL_DB_NAME
+
+	# print(SQLALCHEMY_DATABASE_URI)
+	# os.environ.get("DATABASE_URL") or \ #'sqlite:///' + os.path.join(basedir, 'app.db')
 	
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
 
@@ -38,5 +42,3 @@ class Config(object):
 	# celery config
 	CELERY_BROKER_URL = "redis://localhost:6379/0"
 	CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
-
-	

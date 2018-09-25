@@ -10,3 +10,7 @@ config.pyc pehlaflaskapp.pyc wsgi.pyc
 logs
 .env
 db_files/
+migrations/versions/__pycache__/ 
+migrations/versions/__pycache__ 
+.idea/ 
+virtualenv 
