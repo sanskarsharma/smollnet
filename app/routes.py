@@ -206,4 +206,12 @@ def get_followers(username):
 def get_following(username):
     user = User.query.filter_by(username=username).first_or_404()
     return render_template("followers_following.html", person=user, heading="following")
-    
+
+
+""" ------------------------ APIS for enabling comments below ------------------"""
+
+@app_instance.route("/post/<id>")
+@login_required
+def post_details(id):
+    post = Post.query.filter_by(id=id).first_or_404()
+    return render_template("post_detail.html", post=post, title=post.author.username + "'s post")

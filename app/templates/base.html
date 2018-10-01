@@ -5,6 +5,23 @@
 {% block scripts %}
     {{ super() }}
     {{ moment.include_moment() }}
+
+    <script>
+        $(document).ready(function(){
+
+             $(".post-container").click(function(){
+                console.log("POST CONTAINER CLICKKEDD");
+
+
+
+
+             });
+
+
+
+
+        });
+    </script>
     
 {% endblock %}
 
