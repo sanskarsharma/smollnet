@@ -16,12 +16,18 @@ def send_email(app_instance_here, msg):
 
 # @celery.task
 def send_async_email_task(subject, sender, recipients, text_body, html_body):
-    # print("hello")
+    # print(sender)
+    # print(recipients)
+
     msg = Message(subject, sender=sender, recipients=recipients)
     msg.body = text_body
     msg.html = html_body
+    with app_instance.app_context():
+        mail_instance.send(msg)
 
-    Thread(target=send_email, args=(app_instance, msg)).start()
+    # Commenting this line beacause pyaw free account does not support threads to run asynchronously
+    # so sending the mails synchronously above
+    # Thread(target=send_email, args=(app_instance, msg)).start()
 
 
 def send_password_reset_email(user):
