@@ -6,8 +6,15 @@
         <tr>
             <td width="224px"><img src="{{ user.avatar(224) }}" class="img-rounded img-responsive"></td>
             <td>
-                <h2> @{{ user.username }}</h2>
-                {% if user.about_me %}<p class="well well-sm">{{ user.about_me }}</p>{% endif %}
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                      <h3> @{{ user.username }}</h3>
+                  </div>
+                  <div class="panel-body">
+                      {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+                  </div>
+                </div>
+
                 {% if user.last_seen %}
                 <p>Last seen on: {{ moment(user.last_seen).format('LLL') }} </p>
                 {% endif %}
