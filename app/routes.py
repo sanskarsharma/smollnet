@@ -84,7 +84,7 @@ def user_profile(username):
         if posts.has_next else None
     prev_url = url_for('user_profile', username=user_obj.username, page=posts.prev_num) \
         if posts.has_prev else None
-    return render_template("user_profile.html", user = user_obj, posts = posts.items, next_url=next_url,prev_url=prev_url)
+    return render_template("user_profile.html", user = user_obj, postslist = posts.items, next_url=next_url,prev_url=prev_url, title=user_obj.username + "'s profile")
 
 
 # using this functionality to add last seen feature in our app, whenever a user sends any request it records time

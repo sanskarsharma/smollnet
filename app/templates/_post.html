@@ -32,9 +32,9 @@
     border-radius: 2%;
 }
 
-.post-container:hover{
-   background-color:#E9E6E6;
-}
+<!--.post-container:hover{-->
+   <!--background-color:#E9E6E6;-->
+<!--}-->
 
 .darker {
     border-color: #ccc;
@@ -53,6 +53,11 @@
     width: 100%;
     margin-right: 20px;
     border-radius: 50%;
+}
+
+.post-detail-right {
+    float: right;
+    color: #aaa;
 }
 
 </style>
@@ -76,6 +81,13 @@
                     {% autoescape false %}
                     <p>{{ (post.body).replace("\n","<br>") }}</p>
                     {% endautoescape %}
+
+                    {% if postslist %}
+                    <a href="{{url_for('post_details',id=post.id)}}" class="post-detail-right">
+                        view post
+                    </a>
+                    {% endif %}
+
                 </div>
 
             </div>
