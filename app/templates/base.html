@@ -17,6 +17,33 @@
 
              });
 
+             $(".like_btn").click(function(){
+                console.log("like buttton clicked");
+
+                element_id = $(this).attr("id");
+                var eid = element_id.split("_")[1];
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                          console.log(this.responseText);
+                          var res=JSON.parse(this.responseText);
+                          document.getElementById(element_id+"_count").innerHTML= res["likes_count"] ;
+
+
+                    }else{
+
+                    }
+                };
+
+                xhttp.open("GET", "/entity/" + eid + "/like", false);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send();
+
+
+
+             });
+
 
 
 

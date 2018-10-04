@@ -30,7 +30,6 @@ class User(UserMixin, db_instance.Model):
         lazy="dynamic"
     )
 
-
     def __repr__(self):                             # this method tells Python how to print objects of this class, which is going to be useful for debugging. 
         return "<User {}>".format(self.username)
 
@@ -84,10 +83,98 @@ class User(UserMixin, db_instance.Model):
         except:
             return
         return User.query.get(id)
-            
-    
-    
 
+
+
+@login_manager_instance.user_loader
+def load_user(id):
+    return User.query.get(int (id))
+
+
+""" ------------------ new models below - likes comments etc ---------- """
+
+
+class TimeStampedModel(db_instance.Model):
+    __abstract__ = True
+
+    created_on = db_instance.Column(db_instance.DateTime, default=db_instance.func.now())
+    updated_on = db_instance.Column(db_instance.DateTime, default=db_instance.func.now(), onupdate=db_instance.func.now())
+
+
+class BaseEntity(TimeStampedModel):
+    __tablename__ = 'base_entity'
+
+    id = db_instance.Column(db_instance.Integer, primary_key=True)
+
+    def is_liked_by(self, user):
+        liked = EntityLikes.query.filter_by(user_id=user.id, entity_id=self.id).first()
+        return True if liked is not None else False
+
+    def like(self, user):
+        like = EntityLikes(user_id=user.id, entity_id=self.id)
+        db_instance.session.add(like)
+        db_instance.session.commit()
+
+    def unlike(self, user):
+        like = EntityLikes.query.filter_by(entity_id=self.id, user_id=user.id).first()
+        db_instance.session.delete(like)
+        db_instance.session.commit()
+
+    def likes_count(self):
+        return EntityLikes.query.filter_by(entity_id=self.id).count()
+
+
+class EntityLikes(TimeStampedModel):
+    __tablename__ = 'entity_likes'
+
+    id = db_instance.Column(db_instance.Integer, primary_key=True)
+    user_id = db_instance.Column(db_instance.Integer, db_instance.ForeignKey("user.id"))
+    entity_id = db_instance.Column(db_instance.Integer, db_instance.ForeignKey("base_entity.id"))
+
+    def __repr__(self):
+        return "<EntityLikes {} likes {}>".format(self.user_id, self.entity_id)
+
+
+
+
+class EntityComments(TimeStampedModel):
+    __tablename__ = 'entity_comments'
+
+    _N = 6
+
+    id = db_instance.Column(db_instance.Integer, primary_key=True)
+    entity_id = db_instance.Column(db_instance.Integer, db_instance.ForeignKey("base_entity.id")) # analogous to post_id for our case
+    text = db_instance.Column(db_instance.Text)
+    user_id = db_instance.Column(db_instance.Integer, db_instance.ForeignKey("user.id"))
+    path = db_instance.Column(db_instance.Text)
+    parent_id = db_instance.Column(db_instance.Integer, db_instance.ForeignKey('entity_comments.id'))
+    replies = db_instance.relationship(
+        'EntityComments', backref=db_instance.backref('parent', remote_side=[id]),
+        lazy='dynamic')
+
+    def save(self):
+        db_instance.session.add(self)
+        db_instance.session.commit()
+        prefix = self.parent.path + '.' if self.parent else ''
+        self.path = prefix + '{:0{}d}'.format(self.id, self._N)
+        db_instance.session.commit()
+
+    def level(self):
+        return len(self.path) // self._N - 1
+
+
+class BigPost(TimeStampedModel):
+    __tablename__ = 'big_post'
+
+    id = db_instance.Column(db_instance.Integer, primary_key=True)
+    entity_id = db_instance.Column(db_instance.Integer, db_instance.ForeignKey("base_entity.id"))
+    user_id = db_instance.Column(db_instance.Integer, db_instance.ForeignKey("user.id"))
+
+    title = db_instance.Column(db_instance.String(180))
+    body = db_instance.Column(db_instance.Text)
+
+    def __repr__(self):
+        return "<BigPost {}>".format(self.title)
 
 
 class Post(db_instance.Model):
@@ -95,11 +182,12 @@ class Post(db_instance.Model):
     body = db_instance.Column(db_instance.String(180))
     timestamp = db_instance.Column(db_instance.DateTime, index=True, default=datetime.utcnow)
     user_id = db_instance.Column(db_instance.Integer, db_instance.ForeignKey("user.id"))
+    entity_id = db_instance.Column(db_instance.Integer, db_instance.ForeignKey("base_entity.id"))
+
+    # likes = db_instance.relationship("EntityLikes", primaryjoin=(EntityLikes.entity_id == entity_id), lazy="dynamic")
 
     def __repr__(self):
-        return "<Post {}".format(self.body)
+        return "<Post {} -eid-{}>".format(self.body, self.entity_id)
 
-@login_manager_instance.user_loader
-def load_user(id):
-    return User.query.get(int (id))
-
+    def likes_count(self):
+        return EntityLikes.query.filter_by(entity_id=self.entity_id).count()

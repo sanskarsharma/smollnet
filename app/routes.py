@@ -1,12 +1,12 @@
 from app import app_instance, db_instance
 from flask import render_template, flash, redirect, url_for, request
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, ResetPasswordRequestForm, ResetPasswordForm
-from app.models import User, Post
+from app.models import User, Post, BaseEntity, EntityComments, EntityLikes
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from datetime import datetime
 import time
-
+import json
 from pyfcm import FCMNotification
 
 from app.email import send_password_reset_email
@@ -17,7 +17,12 @@ from app.email import send_password_reset_email
 def index():# this is called a view function
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(body=form.post.data, author=current_user)
+        base_entity = BaseEntity()
+        db_instance.session.add(base_entity)
+        db_instance.session.commit()
+        db_instance.session.refresh(base_entity)
+
+        post = Post(body=form.post.data, author=current_user, entity_id=base_entity.id)
         db_instance.session.add(post)
         db_instance.session.commit()
         flash('Your post is now live!')
@@ -215,3 +220,23 @@ def get_following(username):
 def post_details(id):
     post = Post.query.filter_by(id=id).first_or_404()
     return render_template("post_detail.html", post=post, title=post.author.username + "'s post")
+
+
+@app_instance.route("/entity/<id>/like")
+@login_required
+def entity_like(id):
+    base_entity = BaseEntity.query.get(id)
+    liked = False
+    if base_entity.is_liked_by(current_user):
+        base_entity.unlike(current_user)
+    else:
+        base_entity.like(current_user)
+        liked = True
+
+    response_dict = {}
+    response_dict["message"] = "OK"
+    response_dict["liked"] = liked
+    response_dict["likes_count"] = base_entity.likes_count()
+
+    return json.dumps(response_dict)
+
