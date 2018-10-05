@@ -123,6 +123,9 @@ class BaseEntity(TimeStampedModel):
     def likes_count(self):
         return EntityLikes.query.filter_by(entity_id=self.id).count()
 
+    def likers(self):
+        return User.query.join(EntityLikes, User.id == EntityLikes.user_id).all()
+
 
 class EntityLikes(TimeStampedModel):
     __tablename__ = 'entity_likes'
@@ -182,12 +185,9 @@ class Post(db_instance.Model):
     body = db_instance.Column(db_instance.String(180))
     timestamp = db_instance.Column(db_instance.DateTime, index=True, default=datetime.utcnow)
     user_id = db_instance.Column(db_instance.Integer, db_instance.ForeignKey("user.id"))
-    entity_id = db_instance.Column(db_instance.Integer, db_instance.ForeignKey("base_entity.id"))
+    entity_id = db_instance.Column(db_instance.Integer, db_instance.ForeignKey("base_entity.id"), unique=True) # unique for one-to-one reltnshp
 
-    # likes = db_instance.relationship("EntityLikes", primaryjoin=(EntityLikes.entity_id == entity_id), lazy="dynamic")
+    entity = db_instance.relationship("BaseEntity", backref="post")
 
     def __repr__(self):
         return "<Post {} -eid-{}>".format(self.body, self.entity_id)
-
-    def likes_count(self):
-        return EntityLikes.query.filter_by(entity_id=self.entity_id).count()

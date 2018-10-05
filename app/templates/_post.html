@@ -89,7 +89,7 @@
                     {% endif %}
                     {% if post.entity_id %}
                     <a href="#" class="post-detail-right like_btn" id="like_{{post.entity_id}}">
-                        like post (<span id="like_{{post.entity_id}}_count">{{post.likes_count()}}</span>),
+                        like post (<span id="like_{{post.entity_id}}_count">{{post.entity.likes_count()}}</span>),
                     </a>
                     {% endif %}
 
