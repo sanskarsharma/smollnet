@@ -17,7 +17,11 @@ from celery import Celery
 app_instance = Flask(__name__)
 app_instance.config.from_object(Config)			# setting the Config class from config.py module in our flask app object (app_instance)
 app_instance.debug = False												# NOW our flask app (or our app_instance) knows where to look for config variables (i.e in object of Config class)
-# DEBUG MODE IS off
+
+# adding below config for 'lost connection to mysql' on pyaw error
+app_instance.config['SQLALCHEMY_POOL_RECYCLE'] = 299
+app_instance.config['SQLALCHEMY_POOL_TIMEOUT'] = 20
+
 
 mail_instance = Mail(app_instance)
 bootstrap = Bootstrap(app_instance)
