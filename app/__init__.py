@@ -13,6 +13,7 @@ from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 
 from celery import Celery
+import tweepy
 
 app_instance = Flask(__name__)
 app_instance.config.from_object(Config)			# setting the Config class from config.py module in our flask app object (app_instance)
@@ -22,6 +23,11 @@ app_instance.debug = False												# NOW our flask app (or our app_instance) 
 app_instance.config['SQLALCHEMY_POOL_RECYCLE'] = 299
 app_instance.config['SQLALCHEMY_POOL_TIMEOUT'] = 20
 
+
+twitter_auth = tweepy.OAuthHandler(app_instance.config['TWITTER_CONSUMER_KEY'], app_instance.config['TWITTER_CONSUMER_SECRET'])
+twitter_auth.set_access_token(app_instance.config['TWITTER_ACCESS_TOKEN'], app_instance.config['TWITTER_ACCESS_TOKEN_SECRET'])
+
+twitter_api = tweepy.API(twitter_auth)
 
 mail_instance = Mail(app_instance)
 bootstrap = Bootstrap(app_instance)

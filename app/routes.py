@@ -1,4 +1,4 @@
-from app import app_instance, db_instance
+from app import app_instance, db_instance, twitter_api
 from flask import render_template, flash, redirect, url_for, request
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, ResetPasswordRequestForm, ResetPasswordForm
 from app.models import User, Post, BaseEntity, EntityComments, EntityLikes
@@ -239,4 +239,16 @@ def entity_like(id):
     response_dict["likes_count"] = base_entity.likes_count()
 
     return json.dumps(response_dict)
+
+
+@app_instance.route("/twitter")
+def twitter():
+    response_dict = {}
+    user = twitter_api.get_user("sanskarsharma_")
+    print(user.screen_name)
+    print(user.followers_count)
+    for friend in user.friends():
+        print(friend.screen_name)
+    return json.dumps(response_dict)
+
 
